@@ -1,0 +1,1 @@
+jest.timeout(10000)

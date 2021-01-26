@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: AsTruf4x_p
+      POSTGRES_USER: joinus
+    ports:
+      - 5432:5432
