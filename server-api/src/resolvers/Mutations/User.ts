@@ -20,8 +20,7 @@ export const user = extendType({
             data: {
               name,
               email,
-              password: hashedPassword,
-              role: 'user'
+              password: hashedPassword
             }
           })
 

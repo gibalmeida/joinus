@@ -1,4 +1,4 @@
-import { objectType } from 'nexus'
+import { enumType, objectType } from 'nexus'
 
 export const User = objectType({
   name: 'User',
@@ -44,4 +44,10 @@ export const Job = objectType({
     t.model.createdAt()
     t.model.updatedAt()
   }
+})
+
+export const Role = enumType({
+  name: 'Role',
+  members: [ 'ADMIN', 'MANAGER', 'APPLICANT'],
+  description: 'The user role on the system.',
 })
