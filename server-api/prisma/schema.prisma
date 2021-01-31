@@ -11,19 +11,26 @@ generator client {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  name      String
-  password  String
-  email     String @unique
-  role      String @default("user")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int          @id @default(autoincrement())
+  name       String
+  password   String
+  email      String       @unique
+  role       Role         @default(APPLICANT)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Department Department[]
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  APPLICANT
 }
 
 model Department {
-  id        Int    @id @default(autoincrement())
-  name      String @unique
-  manager   User? @relation(fields: [managerId], references: [id])
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  manager   User?    @relation(fields: [managerId], references: [id])
   managerId Int?
   jobs      Job[]
   createdAt DateTime @default(now())
@@ -31,11 +38,11 @@ model Department {
 }
 
 model Job {
-  id            Int         @id @default(autoincrement())
-  name          String @unique
-  description   String
-  Department    Department? @relation(fields: [departmentId], references: [id])
-  departmentId  Int?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           Int         @id @default(autoincrement())
+  name         String      @unique
+  description  String
+  Department   Department? @relation(fields: [departmentId], references: [id])
+  departmentId Int?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
