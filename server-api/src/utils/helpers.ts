@@ -5,7 +5,8 @@ import { APP_SECRET, tokens } from './constants'
 import { Context, Token } from '../types'
 
 export const handleErrors = (error: any) => {
-  // you can add some logging mechanism here e.g. Sentry
+  // you can add some logging mechanism here e.g. Sentry]
+  // console.log(error)
   throw error
 }
 
