@@ -23,6 +23,7 @@ export const schema = makeSchema({
     alias: 'ctx',
   },
   sourceTypes: {
+    debug: true,
     modules: [
       {
         module: require.resolve('.prisma/client/index.d.ts'),
