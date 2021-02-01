@@ -1,6 +1,6 @@
 import { extendType, nonNull, stringArg } from 'nexus'
-import { compare, hash } from 'bcrypt'
-import { generateAccessToken, handleErrors } from '../../utils/helpers'
+import { compare } from 'bcrypt'
+import { generateAccessToken, handleErrors, hashPassword } from '../../utils/helpers'
 import { errors } from '../../utils/constants'
 
 export const user = extendType({
@@ -15,7 +15,7 @@ export const user = extendType({
       },
       async resolve(_parent, { name, email, password }, ctx) {
         try {
-          const hashedPassword = await hash(password, 10)
+          const hashedPassword = await hashPassword(password)
           const user = await ctx.prisma.user.create({
             data: {
               name,

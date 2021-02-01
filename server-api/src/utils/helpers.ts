@@ -3,6 +3,7 @@ import { PubSub } from 'apollo-server'
 import { sign, verify } from 'jsonwebtoken'
 import { APP_SECRET, tokens } from './constants'
 import { Context, Token } from '../types'
+import { hash } from 'bcrypt'
 
 export const handleErrors = (error: any) => {
   // you can add some logging mechanism here e.g. Sentry]
@@ -60,4 +61,8 @@ export const createContext = (ctx: any): Context => {
     userId,
     userRole
   }
+}
+
+export async function hashPassword(password: string) {
+  return await hash(password, 10)
 }
