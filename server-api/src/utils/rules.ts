@@ -2,6 +2,7 @@ import { shield, rule } from 'graphql-shield'
 import { Context } from '../types'
 import { handleErrors } from './helpers'
 import { errors } from './constants'
+import { Role } from '@prisma/client'
 
 export const rules = {
   isAutheticatedUser: rule( { cache: 'contextual' })(
@@ -19,7 +20,7 @@ export const rules = {
   isAutheticatedUserAndAdmin: rule( { cache: 'contextual' })(
     async (_parent, args, ctx: Context ) => {
       try {
-        if (ctx.userId === -1 || ctx.userRole !== 'admin') {
+        if (ctx.userId === -1 || ctx.userRole !== Role.ADMIN ) {
           return handleErrors(errors.notAllowed)
         }
         return true
