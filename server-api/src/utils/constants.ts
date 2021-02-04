@@ -1,4 +1,4 @@
-import { AuthenticationError, ForbiddenError, UserInputError, ValidationError } from 'apollo-server'
+import { AuthenticationError, ForbiddenError, UserInputError } from 'apollo-server'
 
 export const tokens = {
   access: {
