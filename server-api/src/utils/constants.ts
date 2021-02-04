@@ -1,4 +1,4 @@
-import { AuthenticationError, ForbiddenError, UserInputError } from 'apollo-server'
+import { AuthenticationError, ForbiddenError, UserInputError, ValidationError } from 'apollo-server'
 
 export const tokens = {
   access: {
@@ -10,6 +10,7 @@ export const tokens = {
 export const APP_SECRET = process.env.APP_SECRET
 
 export const isDev = () => process.env.NODE_ENV === 'development'
+export const debugEnabled = () => process.env.DEBUG === 'yes'
 
 export const errors = {
   notAuthenticated: new AuthenticationError('Unauthenticated user!'),
