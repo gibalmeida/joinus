@@ -3,7 +3,6 @@ import { Context } from '../types'
 import { handleErrors } from './helpers'
 import { debugEnabled, errors, isDev } from './constants'
 import { Role } from '@prisma/client'
-import { department } from '../resolvers/Mutations/Department'
 import { NexusGenArgTypes } from '../generated'
 
 export const rules = {
