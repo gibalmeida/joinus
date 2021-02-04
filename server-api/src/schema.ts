@@ -3,6 +3,7 @@ import { makeSchema } from 'nexus'
 import { join } from 'path'
 import * as allTypes from './resolvers'
 import { Context } from './types'
+import { debugEnabled } from './utils/constants'
 
 const nexusPrisma = nexusSchemaPrisma({
   experimentalCRUD: true,
@@ -23,7 +24,7 @@ export const schema = makeSchema({
     alias: 'ctx',
   },
   sourceTypes: {
-    debug: true,
+    debug: debugEnabled(),
     modules: [
       {
         module: require.resolve('.prisma/client/index.d.ts'),
