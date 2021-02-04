@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient, Role, User, UserCreateArgs, UserCreateInput } from '@prisma/client'
+import { Department, Prisma, PrismaClient, Role, User, UserCreateArgs, UserCreateInput } from '@prisma/client'
 import { ServerInfo } from 'apollo-server'
 import { execSync } from 'child_process'
 import getPort, { makeRange } from 'get-port'
@@ -108,56 +108,66 @@ type Credentials = NexusGenArgTypes['Mutation']['login']
 
 export async function createUser(ctx: TestContext, data: Prisma.UserCreateInput) {
 
-  return await ctx.db.user.create({
+  const user = await ctx.db.user.create({
     data: {
       ...data,
       password: await hashPassword(data.password)
     }
   })
 
+  return {...user, password: data.password}
 }
 
 export async function createAdminUser(ctx: TestContext): Promise<User> {
   const credentials: Credentials = {email: "admin@test.com", password: "P4ssw0rd"}
 
-  const user = await createUser(ctx, {
+  return await createUser(ctx, {
       ...credentials,
       name: "Admin",
       role: Role.ADMIN
   })
-
-  return { ...user, password: credentials.password }
 }
 
 export async function createApplicantUser(ctx: TestContext): Promise<User> {
   const credentials: Credentials = {email: "applicant@test.com", password: "p455w0rd"}
 
-  const user = await createUser(ctx, {
+  return await createUser(ctx, {
     ...credentials,
     name: "Applicant",
     role: Role.APPLICANT
   })
-
-  return { ...user, password: credentials.password }
 }
 
 export async function createManagerUser(ctx: TestContext): Promise<User> {
   const credentials: Credentials = {email: "manager@test.com", password: "pA55w_rd"}
 
-  const user = await createUser(ctx, {
+  return await createUser(ctx, {
     ...credentials,
     name: "Manager",
     role: Role.MANAGER
   })
+}
 
-  return { ...user, password: credentials.password }
+export async function createDepartment(ctx: TestContext, data: Prisma.DepartmentCreateInput) {
+
+  return await ctx.db.department.create( { data } )
+
 }
 
 export async function createTestDepartment(ctx: TestContext) {
-  return ctx.db.department.create( {
-    data: {
-      name: "Test Department"      
-    }
+  return createDepartment(ctx, {
+      name: "Test Department"
+  })
+}
+
+export async function createJob(ctx: TestContext, data: Prisma.JobCreateInput) {
+  return await ctx.db.job.create( { data } )
+}
+
+export async function createJobTest(ctx: TestContext) {
+  return createJob(ctx, {
+    name: "Job Test",
+    description: "This is test job"
   })
 }
 
