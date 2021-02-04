@@ -40,6 +40,7 @@ export const Job = objectType({
     t.model.id()
     t.model.name()
     t.model.description()
+    t.model.departmentId()
     t.model.Department()
     t.model.createdAt()
     t.model.updatedAt()
