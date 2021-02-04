@@ -55,3 +55,41 @@ export const deleteDepartmentMutation = /* GraphQL */ `
     }
   }
 `
+
+export const createJobMutation = /* GraphQL */ `
+  mutation createJob($data: JobCreateInput!) {
+    createJob(
+      data: $data
+    ) {
+      id
+      name
+      description
+      departmentId
+    }
+  }
+`
+
+export const updateJobMutation = /* GraphQL */ `
+  mutation updateJob($where: JobWhereUniqueInput!, $data: JobUpdateInput!) {
+    updateJob(
+      where: $where
+      data: $data
+    ) {
+      id
+      name
+      description
+      departmentId
+    }
+  }
+`
+
+export const deleteJobMutation = /* GraphQL */ `
+  mutation deleteJob($where: JobWhereUniqueInput!) {
+    deleteJob(
+      where: $where
+    ) {
+      id
+      name
+    }
+  }
+`
